@@ -1,0 +1,14 @@
+@import 'card.css';
+@import 'list.css';
+
+body {
+  font-family: sans-serif;
+}
+
+.app__container {
+  display: flex;  
+}
+
+.header__close_icon {
+  cursor: pointer;
+}
