@@ -1,8 +1,8 @@
 import './css/index.css'
-import { renderBoard, clearBoard } from './js/board'
+import { renderBoard } from './js/board'
 
 window.onload = function () {
-    let lists = [
+    let dummyLists = [
         {
             id: 1,
             title: 'Todo',
@@ -31,6 +31,8 @@ window.onload = function () {
             ]
         }
     ]
+
+    let lists = localStorage.getItem("lists") ? JSON.parse(localStorage.getItem("lists")) : dummyLists
     
     document.addEventListener('card-deleted', function (event) {
         let { listIndex, cardIndex } = event.detail

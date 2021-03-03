@@ -7,6 +7,7 @@ function clearBoard() {
 
 export function renderBoard(lists) {
     clearBoard()
+    localStorage.setItem("lists", JSON.stringify(lists))
     let addListButton = document.createElement('div')
     addListButton.classList.add('board__add-list-btn')
     addListButton.innerHTML = "Add List"
