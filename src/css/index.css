@@ -1,14 +1,11 @@
 @import 'card.css';
 @import 'list.css';
+@import 'board.css';
 
 body {
   font-family: sans-serif;
 }
 
-.app__container {
-  display: flex;  
-}
-
-.header__close_icon {
+.header__close-button {
   cursor: pointer;
 }

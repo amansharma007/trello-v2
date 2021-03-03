@@ -1,0 +1,18 @@
+.board {
+    display: flex;
+    position: relative;
+}
+
+.board__add-list-btn {
+    position: absolute;
+    top: -40px;
+    right: 20px;
+    padding: 10px;
+    cursor: pointer;
+    background: lightgrey;
+}
+
+.board__add-list-btn:hover {
+    background: grey;
+    color: white;
+}

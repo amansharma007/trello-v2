@@ -1,39 +1,64 @@
 import './css/index.css'
-import { renderViews } from './js/app'
-
-function func(a) {
-    console.log(a)
-}
+import { renderBoard, clearBoard } from './js/board'
 
 window.onload = function () {
     let lists = [
         {
             id: 1,
-            title: 'List 1',
+            title: 'Todo',
             cards: [
                 {
                     id: 1,
-                    title: 'Card 1',
+                    title: 'Workout',
                     description: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam'
                 },
                 {
                     id: 2,
-                    title: 'Card 2',
+                    title: 'Make dinner',
                     description: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam'
                 }
             ]
         },
         {
             id: 2,
-            title: 'List 2',
+            title: 'Doing',
             cards: [
                 {
                     id: 1,
-                    title: 'Card 1',
+                    title: 'Interview prep',
                     description: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam'
                 }
             ]
         }
     ]
-    renderViews(lists)
+    
+    document.addEventListener('card-deleted', function (event) {
+        let { listIndex, cardIndex } = event.detail
+        lists[listIndex].cards.splice(cardIndex, 1)
+        clearBoard()
+        renderBoard(lists)
+    })
+
+    document.addEventListener('list-deleted', function (event) {
+        let { listIndex } = event.detail
+        lists.splice(listIndex, 1)
+        clearBoard()
+        renderBoard(lists)
+    })
+
+    document.addEventListener('card-added', function (event) {
+        let { listIndex, card } = event.detail
+        lists[listIndex].cards.push(card)
+        clearBoard()
+        renderBoard(lists)
+    })
+
+    document.addEventListener('list-added', function (event) {
+        let { list } = event.detail
+        lists.push(list)
+        clearBoard()
+        renderBoard(lists)
+    })
+
+    renderBoard(lists)
 }

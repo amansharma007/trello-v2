@@ -3,7 +3,7 @@
     margin: 20px 20px 0px 20px;
 }
 
-.card .card__header {
+.card__header {
     background: lightgrey;
     padding: 10px;
     display: flex;
@@ -12,6 +12,6 @@
     border-bottom: 2px solid lightblue;
 }
 
-.card .card__body {
+.card__body {
     padding: 10px;
 }
