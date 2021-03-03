@@ -15,17 +15,10 @@ export function renderBoard(lists) {
     initLocalStorage(lists)
 
     let addListButton = getNewElement('Add List', 'board__add-list-btn')
-
+    let listForm = document.getElementsByClassName('list__form')[0]
+    
     addListButton.onclick = () => {
-        let addListEvent = new CustomEvent('list-added', {
-            detail: {
-                list: {
-                    title: 'New List',
-                    cards: []
-                }
-            }
-        })
-        document.dispatchEvent(addListEvent)
+        listForm.classList.remove('hidden')
     }
 
     let board = document.querySelector('.board')

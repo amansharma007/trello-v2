@@ -15,17 +15,11 @@ function createCloseListButton(listElement, listIndex) {
 
 function createAddCardButton(listElement, listIndex) {
     let addCardButton = getNewElement("+", "list__add-card-button")
-
+    let cardForm = document.getElementsByClassName('card__form')[0]
+    
     addCardButton.onclick = function () {
-        let cardAddEvent = new CustomEvent('card-added', {
-            detail: {
-                listIndex,
-                card: {
-                    title: "New List"
-                }
-            }
-        })
-        document.dispatchEvent(cardAddEvent)
+        cardForm.classList.remove('hidden')
+        localStorage.setItem("listIndexToAddCardIn", listIndex)
     }
 
     listElement.appendChild(addCardButton)
