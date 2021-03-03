@@ -1,39 +1,12 @@
 import './css/index.css'
 import { renderBoard } from './js/board'
+import dummyLists from './dummy-board'
 
-window.onload = function () {
-    let dummyLists = [
-        {
-            id: 1,
-            title: 'Todo',
-            cards: [
-                {
-                    id: 1,
-                    title: 'Workout',
-                    description: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam'
-                },
-                {
-                    id: 2,
-                    title: 'Make dinner',
-                    description: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam'
-                }
-            ]
-        },
-        {
-            id: 2,
-            title: 'Doing',
-            cards: [
-                {
-                    id: 1,
-                    title: 'Interview prep',
-                    description: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam'
-                }
-            ]
-        }
-    ]
+window.dummyLists = dummyLists
+window.onload = () => {
 
-    let lists = localStorage.getItem("lists") ? JSON.parse(localStorage.getItem("lists")) : dummyLists
-    
+    let lists = localStorage.getItem("lists") ? JSON.parse(localStorage.getItem("lists")) : window.dummyLists
+
     document.addEventListener('card-deleted', function (event) {
         let { listIndex, cardIndex } = event.detail
         lists[listIndex].cards.splice(cardIndex, 1)

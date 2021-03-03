@@ -1,22 +1,9 @@
-function dragEnd() {
+import { getNewElement } from './utils'
 
-}
-
-export function getCard(cardData, listIndex, cardIndex) {
-    let cardElement = document.createElement('div')
-    cardElement.classList.add('card')
-    cardElement.draggable = true
-    cardElement.innerHTML = `
-    <div class="card__header">
-        <div class="header__title">${cardData.title}</div>
-    </div>
-    <div class="card__body">${cardData.description}</div>
-    `
-
+function addDragEvents(cardElement, cardData, listIndex, cardIndex) {
     cardElement.addEventListener('dragstart', function () {
         setTimeout(() => (this.className = 'invisible'), 0);
-        localStorage.setItem("heldCard", 
-        `{
+        localStorage.setItem("heldCard", `{
             "data": ${JSON.stringify(cardData)}, 
             "cardIndex": ${cardIndex}, 
             "listIndex":  ${listIndex}
@@ -26,18 +13,27 @@ export function getCard(cardData, listIndex, cardIndex) {
     cardElement.addEventListener('dragend', function () {
         this.className = 'card';
     });
+}
 
-    let cardCloseButton = document.createElement('div')
-    cardCloseButton.classList.add('header__close-button')
-    cardCloseButton.innerHTML = "X"
+export function getCard(cardData, listIndex, cardIndex) {
+    let cardElement = getNewElement(`
+        <div class="card__header">
+        <div class="header__title">${cardData.title}</div>
+        </div>
+        <div class="card__body">${cardData.description}</div>
+    `, 'card')
+    cardElement.draggable = true
 
-    let cardCloseEvent = new CustomEvent('card-deleted', {
-        detail: {
-            listIndex,
-            cardIndex
-        }
-    })
+    addDragEvents(cardElement, cardData, listIndex, cardIndex)
+
+    let cardCloseButton = getNewElement('X', 'header__close-button')
     cardCloseButton.onclick = function () {
+        let cardCloseEvent = new CustomEvent('card-deleted', {
+            detail: {
+                listIndex,
+                cardIndex
+            }
+        })
         document.dispatchEvent(cardCloseEvent)
     }
 
