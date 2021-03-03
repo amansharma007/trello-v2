@@ -38,6 +38,20 @@ function createCardAddButton(listElement, listIndex) {
     listElement.appendChild(cardAddButton)
 }
 
+function dragOver(e) {
+    e.preventDefault();
+    this.className = 'list hovered';
+}
+
+function dragEnter(e) {
+    e.preventDefault();
+    // this.className += ' hovered';
+}
+
+function dragLeave() {
+    this.className = 'list';
+}
+
 export function getList(list, listIndex) {
     let listElement = document.createElement('div')
     listElement.classList.add('list')
@@ -52,6 +66,31 @@ export function getList(list, listIndex) {
     createListCloseButton(listElement, listIndex)
 
     createCardAddButton(listElement, listIndex)
+
+    listElement.addEventListener('dragover', dragOver);
+    listElement.addEventListener('dragenter', dragEnter);
+    listElement.addEventListener('dragleave', dragLeave);
+    listElement.addEventListener('drop', function () {
+        this.className = 'list';
+        let heldCard = JSON.parse(localStorage.getItem("heldCard"))
+        let cardAddEvent = new CustomEvent('card-added', {
+            detail: {
+                listIndex,
+                card: heldCard.data
+            }
+        })
+        document.dispatchEvent(cardAddEvent)
+
+        let cardCloseEvent = new CustomEvent('card-deleted', {
+            detail: {
+                listIndex: heldCard.listIndex,
+                cardIndex: heldCard.cardIndex
+            }
+        })
+        document.dispatchEvent(cardCloseEvent)
+
+        localStorage.removeItem("heldCard")
+    });
 
     let listBody = listElement.getElementsByClassName('list__body')[0]
     list.cards.map((card, index) => listBody.appendChild(getCard(card, listIndex, index)))

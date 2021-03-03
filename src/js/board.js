@@ -1,11 +1,12 @@
 import { getList } from './list'
 
-export function clearBoard() {
+function clearBoard() {
     let board = document.querySelector('.board')
     board.innerHTML = ""
 }
 
 export function renderBoard(lists) {
+    clearBoard()
     let addListButton = document.createElement('div')
     addListButton.classList.add('board__add-list-btn')
     addListButton.innerHTML = "Add List"

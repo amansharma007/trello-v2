@@ -9,3 +9,12 @@ body {
 .header__close-button {
   cursor: pointer;
 }
+
+.invisible {
+  display: none;
+}
+
+.hovered {
+  /* background: #f4f4f4; */
+  border-style: dashed;
+}

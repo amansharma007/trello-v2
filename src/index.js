@@ -35,28 +35,24 @@ window.onload = function () {
     document.addEventListener('card-deleted', function (event) {
         let { listIndex, cardIndex } = event.detail
         lists[listIndex].cards.splice(cardIndex, 1)
-        clearBoard()
         renderBoard(lists)
     })
 
     document.addEventListener('list-deleted', function (event) {
         let { listIndex } = event.detail
         lists.splice(listIndex, 1)
-        clearBoard()
         renderBoard(lists)
     })
 
     document.addEventListener('card-added', function (event) {
         let { listIndex, card } = event.detail
-        lists[listIndex].cards.push(card)
-        clearBoard()
+        lists[listIndex].cards.unshift(card)
         renderBoard(lists)
     })
 
     document.addEventListener('list-added', function (event) {
         let { list } = event.detail
         lists.push(list)
-        clearBoard()
         renderBoard(lists)
     })
 
