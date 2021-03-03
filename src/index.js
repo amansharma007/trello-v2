@@ -19,6 +19,12 @@ window.onload = () => {
         renderBoard(lists)
     })
 
+    document.addEventListener('card-added', function (event) {
+        let { listIndex, card } = event.detail
+        lists[listIndex].cards.unshift(card)
+        renderBoard(lists)
+    })
+
     let addCardFormButton = document.querySelector(".card__form button")
     addCardFormButton.onclick = function () {
         let title = document.querySelector('.card__form .title').value
